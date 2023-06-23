@@ -8,6 +8,11 @@ exports.getHomePage = (req, res, next) => {
   res.sendFile(path.join(rootDir, "views", "signup.html"));
 };
 
+exports.getloginPage = (req,res,next)=>{
+    res.sendFile(path.join(rootDir,'views','login.html'));
+}
+
+
 exports.postAddUser = async (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -35,3 +40,31 @@ exports.postAddUser = async (req, res, next) => {
     console.log(err);
   }
 };
+
+function generateAccessToken(id){
+    return jwt.sign({userid:id},'secretKey')
+}
+
+exports.postCheckUser =async (req,res,next)=>{
+    const email = req.body.email
+    const password = req.body.password
+    try{
+        const user =await User.findAll({where:{email}});
+        if(user.length>0){
+            bcrypt.compare(password,user[0].password,(err,result)=>{
+                if(result==true){
+                    res.status(200).json({message:"successfully login",token:generateAccessToken(user[0].id)});
+                }
+                else{
+                     res.status(400).json({message:"password is wrong"});
+                }
+            })
+        }
+        else{
+             res.status(400).json({message:"user does not exist"})
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+}

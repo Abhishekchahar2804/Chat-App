@@ -17,9 +17,9 @@ async function AleradyUser(e) {
       "http://localhost:4000/user/login/login-user",
       obj
     );
-    // alert(response.data.message);
-    // localStorage.setItem('token',response.data.token);
-    // console.log(response.data.token);
+    alert(response.data.message);
+    localStorage.setItem('token',response.data.token);
+    console.log(response.data.token);
     //     window.location.href="/expense/";
   } catch (err) {
     console.log(err);
