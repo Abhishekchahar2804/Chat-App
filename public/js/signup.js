@@ -23,7 +23,14 @@ async function AddUser(e) {
 
   try {
     const response = await axios.post('http://localhost:4000/user/signup',obj);
-    console.log(response.data.userInfo);
+    if(response.data.message==='success'){
+      console.log(response.data.userInfo);
+      alert('Successfuly Signed Up');
+    }
+    else{
+      alert('User Alerady Exist Please Login')
+    }
+    
   } catch (err) {
     console.log(err);
   }
