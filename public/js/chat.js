@@ -22,3 +22,18 @@ async function addChat(e) {
     console.log(err);
   }
 }
+
+window.addEventListener('DOMContentLoaded',async()=>{
+  try{
+      const token =localStorage.getItem('token');
+      const response =await axios.get('http://localhost:4000/chat/all-messages',{ headers: { Authorization: token } });
+      console.log(response.data);
+  }
+  catch(err){
+    console.log(err);
+  }
+})
+
+function showOnScreen(obj){
+
+}
