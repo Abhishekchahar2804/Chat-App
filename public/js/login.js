@@ -20,7 +20,7 @@ async function AleradyUser(e) {
     alert(response.data.message);
     localStorage.setItem('token',response.data.token);
     console.log(response.data.token);
-    //     window.location.href="/expense/";
+    window.location.href="/chat/";
   } catch (err) {
     console.log(err);
     document.getElementById("err").innerText = err.response.data.message;

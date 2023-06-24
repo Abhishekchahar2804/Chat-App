@@ -21,8 +21,8 @@ exports.postAddUser = async (req, res, next) => {
 
   try {
     const user = await User.findAll({where:{email}});
-    console.log(user);
-    if (user) {
+    // console.log(user);
+    if (user.length>0) {
       res.status(200).json({ message: "not success" });
     } else {
       const saltRounds = 10;
@@ -42,7 +42,7 @@ exports.postAddUser = async (req, res, next) => {
 };
 
 function generateAccessToken(id){
-    return jwt.sign({userid:id},'secretKey')
+    return jwt.sign({userId:id},'secretKey')
 }
 
 exports.postCheckUser =async (req,res,next)=>{

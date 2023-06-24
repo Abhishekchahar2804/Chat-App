@@ -65,3 +65,15 @@ ul li {
 #btn:hover {
     background: #444;
 }
+
+#footer {
+    position: fixed;
+    bottom: 8%;
+    /* height: 60px;   */
+ }
+
+.center{
+    margin-left:25%;
+    width: 50%;
+}
+ 
