@@ -53,7 +53,7 @@ exports.postCheckUser =async (req,res,next)=>{
         if(user.length>0){
             bcrypt.compare(password,user[0].password,(err,result)=>{
                 if(result==true){
-                    res.status(200).json({message:"successfully login",token:generateAccessToken(user[0].id)});
+                    res.status(200).json({message:"successfully login",token:generateAccessToken(user[0].id),user:user.name});
                 }
                 else{
                      res.status(400).json({message:"password is wrong"});

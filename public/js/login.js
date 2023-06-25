@@ -19,7 +19,15 @@ async function AleradyUser(e) {
     );
     alert(response.data.message);
     localStorage.setItem('token',response.data.token);
-    console.log(response.data.token);
+    // console.log(response.data.token);
+    const data=await axios.get('/chat/all-chats',{ headers: { Authorization: response.data.token } });
+    const chatArr=[];
+    const allChats = data.data;
+    let n=allChats.length;
+    for(let i=n-5|0;i<n;i++){
+      chatArr.push(allChats[i])
+    }
+    localStorage.setItem('chats',JSON.stringify(chatArr));
     window.location.href="/chat/";
   } catch (err) {
     console.log(err);
