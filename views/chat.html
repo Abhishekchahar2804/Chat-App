@@ -13,12 +13,38 @@
         <ul id="users"></ul>
         
     </section>
-    <div id="footer" class="center">
-        <form id="my-form">
+    <div>
+        <form id="addOradmin">
+            <select id="select-user">
+                <option value=""> Select User </option>
+            </select>
+            <select id="select-group">
+                <option value=""> Select Group </option>
+            </select>
+            <input type="button" value="Add" id="add-user">
+            <input type="button" value="Admin" id="admin-user">
+        </form>
+    </div>
+    <div>
+        <h2>Group:</h2>
+        <ul id="groups"></ul>
+    </div>
+    <div class="center">
+        <form action="" >
+            <input type="text" id="group">
+            <button type="submit" class="create">Create</button>
+        </form>
+    </div>
+    <div id="chat-one" class="center" style="visibility: visible;">
+        <form>
             <input type="text" id="chat">
             <button type="submit" class="send">Send</button>
         </form>
     </div>
+    <form id="chat-group" style="visibility: hidden;" class="center" >
+        <input type="text" name="text" placeholder="chat inside group..." required>
+        <input type="submit" value="Send">
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>

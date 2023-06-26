@@ -14,18 +14,29 @@ app.use(express.json());
 const sequelize = require("./util/database");
 const userRoute=require('./routes/user');
 const chatRoute =require('./routes/chat');
+const groupRoute=require('./routes/group');
 
 app.use('/user',userRoute);
 app.use('/chat',chatRoute);
+app.use('/group',groupRoute);
 
 const User = require('./models/user');
 const Chat=require('./models/chat');
+const Group=require('./models/group');
+const groupMessage=require('./models/groupmessage');
+const groupUser=require('./models/groupuser');
 
 User.hasMany(Chat);
 Chat.belongsTo(User);
 
+User.hasMany(groupMessage);
+Group.hasMany(groupMessage);
+Group.hasMany(groupUser);
+User.hasMany(groupUser);
+
 sequelize
   .sync()
+
   .then((result) => {
     server.listen(4000);
   })
