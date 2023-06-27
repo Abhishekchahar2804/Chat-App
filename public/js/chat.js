@@ -1,3 +1,11 @@
+var socket = io();
+
+socket.on("message-recived", (data) => {
+  let li = document.createElement("li");
+  li.innerHTML = `${data.username} ${data.message}`;
+  ul.append(li);
+});
+
 const chat = document.querySelector(".send");
 const ul = document.getElementById("users");
 const groups = document.getElementById("groups");
@@ -34,6 +42,7 @@ async function addChat(e) {
       localChats.shift();
     }
     localChats.push(response.data.chat);
+    socket.emit("message-sent", response.data.chat);
     localStorage.setItem("chats", JSON.stringify(localChats));
     let li = document.createElement("li");
     li.innerHTML =
@@ -143,8 +152,8 @@ async function getGroups() {
 
 async function groupChat(id) {
   try {
-    groupChatBox.style="visibility: visible;"
-    document.getElementById('chat-one').style="visibility: hidden;"
+    groupChatBox.style = "visibility: visible;";
+    document.getElementById("chat-one").style = "visibility: hidden;";
     const token = localStorage.getItem("token");
     const grpChats = await axios.get(
       "http://localhost:4000/group/group-chat/" + id,
@@ -191,13 +200,14 @@ async function getUsers() {
 groupChatBox.addEventListener("submit", async (e) => {
   e.preventDefault();
   let chat = document.querySelector('#chat-group input[type="text"]').value;
-  const token=localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const sendGrpChat = await axios.post(
     "/group/sendchat/",
-    { message: chat},
+    { message: chat },
     { headers: { Authorization: token } }
   );
   console.log(sendGrpChat.data);
+  socket.emit("message-sent", sendGrpChat.data.sendchat.message);
   let li = document.createElement("li");
   li.innerHTML = sendGrpChat.data.sendChat.message;
   ul.append(li);

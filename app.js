@@ -34,6 +34,12 @@ Group.hasMany(groupMessage);
 Group.hasMany(groupUser);
 User.hasMany(groupUser);
 
+io.on("connection",socket => {
+  socket.on('message-sent',(data)=>{
+    socket.broadcast.emit('message-recived',data);
+  })
+})
+
 sequelize
   .sync()
 
