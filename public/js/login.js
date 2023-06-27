@@ -14,7 +14,7 @@ async function AleradyUser(e) {
   // console.log(obj);
   try {
     const response = await axios.post(
-      "http://localhost:4000/user/login/login-user",
+      "http://3.95.214.198:4000/user/login/login-user",
       obj
     );
     alert(response.data.message);

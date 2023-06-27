@@ -33,7 +33,7 @@ async function addChat(e) {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      "http://localhost:4000/chat/message",
+      "http://3.95.214.198:4000/chat/message",
       obj,
       { headers: { Authorization: token } }
     );
@@ -64,7 +64,7 @@ async function addGroup(e) {
     };
     const token = localStorage.getItem("token");
     const createGroup = await axios.post(
-      "http://localhost:4000/group/create",
+      "http://3.95.214.198:4000/group/create",
       obj,
       { headers: { Authorization: token } }
     );
@@ -104,7 +104,7 @@ async function joinGroup(id) {}
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.get("http://localhost:4000/chat/all-user", {
+    const response = await axios.get("http://3.95.214.198:4000/chat/all-user", {
       headers: { Authorization: token },
     });
     // console.log(response.data);
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 async function getGroups() {
   try {
     const token = localStorage.getItem("token");
-    const allGroups = await axios.get("http://localhost:4000/group/all", {
+    const allGroups = await axios.get("http://3.95.214.198:4000/group/all", {
       headers: { Authorization: token },
     });
 
@@ -156,7 +156,7 @@ async function groupChat(id) {
     document.getElementById("chat-one").style = "visibility: hidden;";
     const token = localStorage.getItem("token");
     const grpChats = await axios.get(
-      "http://localhost:4000/group/group-chat/" + id,
+      "http://3.95.214.198:4000/group/group-chat/" + id,
       { headers: { Authorization: token } }
     );
 
@@ -181,7 +181,7 @@ async function groupChat(id) {
 async function getUsers() {
   try {
     const token = localStorage.getItem("token");
-    const allUsers = await axios.get("http://localhost:4000/chat/all-user", {
+    const allUsers = await axios.get("http://3.95.214.198:4000/chat/all-user", {
       headers: { Authorization: token },
     });
     let usersData = allUsers.data.user;

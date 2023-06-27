@@ -22,7 +22,7 @@ async function AddUser(e) {
   };
 
   try {
-    const response = await axios.post('http://localhost:4000/user/signup',obj);
+    const response = await axios.post('http://3.95.214.198:4000/user/signup',obj);
     if(response.data.message==='success'){
       console.log(response.data.userInfo);
       alert('Successfuly Signed Up');
